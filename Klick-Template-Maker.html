@@ -125,7 +125,7 @@ details summary{cursor:pointer;font:600 15px 'Fredoka',system-ui,sans-serif}
     </div>
     <div class="field">
       <label class="check"><input type="checkbox" id="showLogo" checked> Show the Klick logo</label>
-      <label class="check" style="margin-top:8px"><input type="checkbox" id="mono"> Black &amp; white printer (receipt / thermal paper)</label>
+      <label class="check" style="margin-top:8px"><input type="checkbox" id="mono" checked> Black &amp; white printer (receipt / thermal paper)</label>
       <div class="hint">Turns the design into clean black lines on white, which prints sharply on a thermal printer.</div>
       <label class="check" style="margin-top:8px"><input type="checkbox" id="seeThrough"> See-through photo boxes</label>
       <div class="hint">Leave this off for black boxes. Turn it on only if your app needs see-through holes instead.</div>
@@ -519,7 +519,7 @@ function render(canvas,o,logo){
 /* ---------- app ---------- */
 const $=id=>document.getElementById(id);
 const FIELDS=["title","sub","date"];
-const state={preset:"80x150",W:945,H:1772,twoUp:false,mono:false,n:4,arr:"auto",shape:"tall",theme:"klick-classic",title:"",sub:"",date:"",showLogo:true,seeThrough:false,clientLogo:null,clientLogoName:"",edited:{title:false,sub:false,date:false}};
+const state={preset:"80x150",W:945,H:1772,twoUp:false,mono:true,n:4,arr:"auto",shape:"tall",theme:"klick-classic",title:"",sub:"",date:"",showLogo:true,seeThrough:false,clientLogo:null,clientLogoName:"",edited:{title:false,sub:false,date:false}};
 let LOGO=null;
 function loadImg(src){return new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=src;});}
 async function boot(){
