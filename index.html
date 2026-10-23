@@ -658,8 +658,7 @@ async function importClientLogo(file){
     const img=await loadImg(await readFile(file));
     if(gen!==importGen)return;                           // another file was chosen, or Remove was clicked, while this one loaded
     if(img.width*img.height>30e6)throw new Error("big");
-    const {canvas,light}=prepareLogo(img);
-    if(gen!==importGen)return;
+    const {canvas,light}=prepareLogo(img);                // synchronous: the counter cannot move before the next await
     const r=await setClientLogo(canvas.toDataURL("image/png"),file.name,true,gen);
     if(!r.applied)return;
     const tips=[];
