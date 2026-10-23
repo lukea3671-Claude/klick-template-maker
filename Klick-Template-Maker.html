@@ -525,7 +525,7 @@ function loadImg(src){return new Promise((res,rej)=>{const i=new Image();i.onloa
 async function boot(){
   await Promise.all(["700 40px 'Fredoka'","500 40px 'Fredoka'","400 40px 'Great Vibes'","600 40px 'Cormorant Garamond'","italic 500 40px 'Cormorant Garamond'"].map(f=>document.fonts.load(f)));
   LOGO=await loadImg(LOGO_SRC);
-  window.KLICK={THEMES,PRESETS,ARRANGEMENTS,SAFE,render:(c,o)=>render(c,o,LOGO),setClientLogo,clearClientLogo,importClientLogo,restoreClientLogo,LOGO,last:null};
+  window.KLICK={THEMES,PRESETS,ARRANGEMENTS,SAFE,render:(c,o)=>render(c,o,LOGO),setClientLogo,clearClientLogo,importClientLogo,restoreClientLogo,LOGO,CLIENT_KEY,last:null,ready:false};
   $("brandLogo").src=LOGO_SRC;
   for(const [k,p] of Object.entries(PRESETS)){const op=document.createElement("option");op.value=k;op.textContent=p.label;$("preset").appendChild(op);}
   for(const n of [1,2,3,4,6]){const b=document.createElement("button");b.type="button";b.textContent=n;b.dataset.n=n;b.setAttribute("aria-label",n+(n>1?" photos":" photo"));b.onclick=()=>{state.n=n;state.arr="auto";
@@ -550,6 +550,7 @@ async function boot(){
   for(const k of FIELDS)setField(k,sampleOf(state.theme)[k]);
   $("preset").value=state.preset;applyPreset(true);syncArr();draw();
   await restoreClientLogo(); // the client logo from last time, with a notice so it is never reused by accident
+  window.KLICK.ready=true;
 }
 function mmSize(bx){const b=bx.reduce((m,x)=>x.w*x.h<m.w*m.h?x:m,bx[0]);return `${R(b.w/PXMM)} × ${R(b.h/PXMM)} mm`;} // smallest photo, at 300 dpi
 function sampleOf(id){return THEMES.find(x=>x.id===id).sample;}
